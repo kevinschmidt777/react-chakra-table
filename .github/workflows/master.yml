@@ -29,8 +29,9 @@ jobs:
           path: |
             ./lib
             ./package.json
+            ./README.md
 
-  publish:
+  release:
     needs: [build]
 
     runs-on: ubuntu-latest
@@ -48,7 +49,7 @@ jobs:
 
       - name: Create Release
         id: create_release
-        uses: actions/create-release@v1
+        uses: actions/create-release@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         with:
@@ -57,6 +58,20 @@ jobs:
           release_name: ${{ steps.package-version.outputs.current-version}}
           draft: false
           prerelease: false
+
+  publish:
+    needs: [build]
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get artifact
+        uses: actions/download-artifact@master
+        with:
+          name: react-chakra-table
+          path: |
+            ./
+            !./package.json
 
       - name: Setup npm
         uses: actions/setup-node@v2
