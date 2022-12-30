@@ -1,6 +1,6 @@
 {
   "name": "react-chakra-table",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "a simple, sortable, filterable, react table grid - styled with chakra-ui.",
   "scripts": {
     "build": "tsc -p ./tsconfig.json"
