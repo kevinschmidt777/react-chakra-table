@@ -1,6 +1,6 @@
 {
   "name": "react-chakra-table",
-  "version": "0.9.12",
+  "version": "0.10.0",
   "description": "a simple, sortable, filterable, react table grid - styled with chakra-ui.",
   "scripts": {
     "build": "tsc -p ./tsconfig.json"
@@ -42,14 +42,15 @@
     "typescript": "^4.9.4"
   },
   "peerDependencies": {
-    "react": ">=18",
-    "react-dom": ">=18",
     "@chakra-ui/react": ">=2",
     "@emotion/react": ">=11",
     "@emotion/styled": ">=11",
-    "framer-motion": ">=6"
+    "framer-motion": ">=6",
+    "react": ">=18",
+    "react-dom": ">=18"
   },
   "dependencies": {
+    "@chakra-ui/icons": "2.0.15",
     "@tanstack/react-table": "8.7.4",
     "dayjs": "1.11.7",
     "react-export-table-to-excel": "1.0.6"

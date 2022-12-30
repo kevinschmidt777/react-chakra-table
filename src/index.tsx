@@ -1,4 +1,5 @@
 import {
+  CellContext,
   Column,
   ColumnFiltersState,
   FilterFn,
@@ -20,8 +21,6 @@ import {
   Icon,
   IconButton,
   Input,
-  StatUpArrow,
-  StatDownArrow,
   Table as ChakraTable,
   TableContainer,
   Tbody,
@@ -30,13 +29,53 @@ import {
   Th,
   Thead,
   Tr,
+  ButtonProps,
+  IconButtonProps,
 } from "@chakra-ui/react";
+import {
+  ArrowBackIcon,
+  ArrowDownIcon,
+  ArrowForwardIcon,
+  ArrowUpIcon,
+  DownloadIcon,
+} from "@chakra-ui/icons";
 import { downloadExcel } from "react-export-table-to-excel";
 import dayjs from "dayjs";
 import LocalizedFormat from "dayjs/plugin/localizedFormat";
 import { numberFormatter } from "./utils/numbers";
 import { getDate, isDate } from "./utils/date";
-import { ReactChakraTableProps } from "./types/reactChakraTable";
+
+export interface ReactChakraTableColumn {
+  accessorFn: (row: any) => void;
+  id: string;
+  cell: (info: CellContext<any, unknown>) => void;
+  aggregatedCell?: (info: CellContext<any, unknown>) => void;
+  header: string;
+  enableColumnFilters?: boolean;
+}
+
+export interface ReactChakraTableProps {
+  columns: ReactChakraTableColumn[];
+  dateColumns: string[];
+  data: any[];
+  amountText?: string;
+  exportText?: string;
+  language?: string;
+  sortIconColor?: string;
+  sortIconUp?: any;
+  sortIconDown?: any;
+  exportIcon?: any;
+  paginationPageButtonProps?: ButtonProps;
+  paginationNextPrevButtonProps?: IconButtonProps;
+  paginationNextIcon?: any;
+  paginationPrevIcon?: any;
+  exportButtonProps?: ButtonProps;
+  filterByText?: string;
+  defaultSorting?: SortingState;
+  defaultFiltering?: ColumnFiltersState;
+  itemsPerPage?: number;
+  onRowClick?: (row?: Row<any>) => void;
+}
 
 /**
  * Displays a table-grid, based on ChakraUI, with filtering and sorting options.
@@ -149,9 +188,9 @@ const ReactChakraTable = (props: ReactChakraTableProps) => {
                           asc: (
                             <Icon
                               as={
-                                props.sortIconDown
-                                  ? props.sortIconDown
-                                  : StatDownArrow
+                                props.sortIconUp
+                                  ? props.sortIconUp
+                                  : ArrowUpIcon
                               }
                               color={props.sortIconColor}
                               w="4"
@@ -162,9 +201,9 @@ const ReactChakraTable = (props: ReactChakraTableProps) => {
                           desc: (
                             <Icon
                               as={
-                                props.sortIconUp
-                                  ? props.sortIconUp
-                                  : StatUpArrow
+                                props.sortIconDown
+                                  ? props.sortIconDown
+                                  : ArrowDownIcon
                               }
                               color={props.sortIconColor}
                               w="4"
@@ -223,7 +262,11 @@ const ReactChakraTable = (props: ReactChakraTableProps) => {
           aria-label="<"
           icon={
             <Icon
-              as={props.paginationPrevIcon ? props.paginationPrevIcon : "<"}
+              as={
+                props.paginationPrevIcon
+                  ? props.paginationPrevIcon
+                  : ArrowBackIcon
+              }
             />
           }
           isDisabled={page === 1}
@@ -235,7 +278,11 @@ const ReactChakraTable = (props: ReactChakraTableProps) => {
           aria-label=">"
           icon={
             <Icon
-              as={props.paginationNextIcon ? props.paginationNextIcon : ">"}
+              as={
+                props.paginationNextIcon
+                  ? props.paginationNextIcon
+                  : ArrowForwardIcon
+              }
             />
           }
           isDisabled={page === pagesCounter}
@@ -308,7 +355,7 @@ const ReactChakraTable = (props: ReactChakraTableProps) => {
               onClick={() => downloadExcelHandler()}
               leftIcon={
                 <Icon
-                  as={props.exportIcon ? props.exportIcon : "^"}
+                  as={props.exportIcon ? props.exportIcon : DownloadIcon}
                   w="5"
                   h="5"
                 />
