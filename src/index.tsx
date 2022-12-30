@@ -31,6 +31,7 @@ import {
   Tr,
   ButtonProps,
   IconButtonProps,
+  TableContainerProps,
 } from "@chakra-ui/react";
 import {
   ArrowBackIcon,
@@ -74,6 +75,7 @@ export interface ReactChakraTableProps {
   defaultSorting?: SortingState;
   defaultFiltering?: ColumnFiltersState;
   itemsPerPage?: number;
+  tableContainerProps?: TableContainerProps;
   onRowClick?: (row?: Row<any>) => void;
 }
 
@@ -107,7 +109,7 @@ const ReactChakraTable = (props: ReactChakraTableProps) => {
   const filterFunction: FilterFn<any> = (row, columnId, value) => {
     let string = row.getValue(columnId) as string;
     // If date, reformat!
-    if (isDate(string)) string = getDate(string, true);
+    if (isDate(string)) string = getDate(string, true, props.language);
     return string.toLowerCase().includes(value.toLowerCase());
   };
 
@@ -160,7 +162,7 @@ const ReactChakraTable = (props: ReactChakraTableProps) => {
   );
 
   const tableRenderer = (
-    <TableContainer>
+    <TableContainer {...props.tableContainerProps}>
       <ChakraTable>
         <Thead>
           {table.getHeaderGroups().map((headerGroup) => (
@@ -249,6 +251,10 @@ const ReactChakraTable = (props: ReactChakraTableProps) => {
         key={item}
         onClick={() => setPage(item)}
         {...props.paginationPageButtonProps}
+        opacity={page === item ? 1 : 0.5}
+        _hover={{
+          opacity: 1,
+        }}
       >
         {item}
       </Button>
@@ -317,8 +323,8 @@ const ReactChakraTable = (props: ReactChakraTableProps) => {
       for (const head of headerKeys) {
         prepairedNewBodyItem = {
           ...prepairedNewBodyItem,
-          [headersObject[head]]: props.dateColumns.includes(headersObject[head])
-            ? getDate(item.original[head], true)
+          [headersObject[head]]: props.dateColumns.includes(head)
+            ? getDate(item.original[head], true, props.language)
             : item.original[head],
         };
       }
@@ -327,8 +333,8 @@ const ReactChakraTable = (props: ReactChakraTableProps) => {
     }
 
     return downloadExcel({
-      fileName: "export-" + getDate() + ".xls",
-      sheet: "export-" + getDate(),
+      fileName: "export-" + getDate(undefined, false, props.language) + ".xls",
+      sheet: "export-" + getDate(undefined, false, props.language),
       tablePayload: {
         header: headers,
         body: body,
