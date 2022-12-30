@@ -6,7 +6,7 @@ import {
   SortingState,
 } from "@tanstack/react-table";
 
-interface ReactChakraTableColumn {
+export interface ReactChakraTableColumn {
   accessorFn: (row: any) => void;
   id: string;
   cell: (info: CellContext<any, unknown>) => void;

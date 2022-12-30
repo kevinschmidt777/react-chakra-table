@@ -1,11 +1,9 @@
 {
   "name": "react-chakra-table",
-  "version": "0.9.10",
+  "version": "0.9.11",
   "description": "a simple, sortable, filterable, react table grid - styled with chakra-ui.",
   "scripts": {
-    "build": "npm run build:esm && npm run build:cjs",
-    "build:esm": "tsc -p ./tsconfig.esm.json",
-    "build:cjs": "tsc -p ./tsconfig.cjs.json"
+    "build": "tsc -p ./tsconfig.esm.json"
   },
   "keywords": [
     "chakra",
@@ -22,19 +20,8 @@
   "files": [
     "lib/**/*"
   ],
-  "types": "./lib/esm/types/index.d.ts",
-  "exports": {
-    ".": {
-      "import": {
-        "types": "./lib/esm/types/index.d.ts",
-        "default": "./lib/esm/index.mjs"
-      },
-      "require": {
-        "types": "./lib/cjs/types/index.d.ts",
-        "default": "./lib/cjs/index.js"
-      }
-    }
-  },
+  "types": "./lib/types/index.d.ts",
+  "main": "./lib/index.js",
   "release": {
     "branches": [
       "master"
