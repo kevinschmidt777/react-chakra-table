@@ -28,6 +28,7 @@ jobs:
           name: react-chakra-table
           path: |
             ./lib
+            ./package.json
   publish:
     needs: [build]
 
