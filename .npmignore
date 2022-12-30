@@ -1,0 +1,11 @@
+.github
+.git
+node_modules
+src
+.gitignore
+.npmignore
+package-lock.json
+package.json
+tsconfig.base.json
+tsconfig.cjs.json
+tsconfig.esm.json
