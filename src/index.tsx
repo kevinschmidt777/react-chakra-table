@@ -149,11 +149,9 @@ const ReactChakraTable = (props: ReactChakraTableProps) => {
                           asc: (
                             <Icon
                               as={
-                                props.sortIconDown ? (
-                                  props.sortIconDown
-                                ) : (
-                                  <StatDownArrow />
-                                )
+                                props.sortIconDown
+                                  ? props.sortIconDown
+                                  : StatDownArrow
                               }
                               color={props.sortIconColor}
                               w="4"
@@ -164,11 +162,9 @@ const ReactChakraTable = (props: ReactChakraTableProps) => {
                           desc: (
                             <Icon
                               as={
-                                props.sortIconUp ? (
-                                  props.sortIconUp
-                                ) : (
-                                  <StatUpArrow />
-                                )
+                                props.sortIconUp
+                                  ? props.sortIconUp
+                                  : StatUpArrow
                               }
                               color={props.sortIconColor}
                               w="4"
