@@ -34,15 +34,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: bbonkr/get-version-action@v1.0.4
+        id: get_version
+        with:
+          project: "./package.json"
+
       - name: Get artifact
         uses: actions/download-artifact@master
         with:
           name: react-chakra-table
           path: ./
-
-      - name: Get Version
-        id: package-version
-        uses: martinbeentjes/npm-get-version-action@main
 
       - name: Create Release
         id: create_release
@@ -50,8 +51,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         with:
-          tag_name: ${{ steps.package-version.outputs.current-version }}
-          release_name: ${{ steps.package-version.outputs.current-version }}
+          tag_name: ${{ steps.get_version.outputs.version }}
+          release_name: ${{ steps.get_version.outputs.version }}
           draft: false
           prerelease: false
 
