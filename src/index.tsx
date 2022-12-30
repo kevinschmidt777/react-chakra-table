@@ -20,6 +20,8 @@ import {
   Icon,
   IconButton,
   Input,
+  StatUpArrow,
+  StatDownArrow,
   Table as ChakraTable,
   TableContainer,
   Tbody,
@@ -29,13 +31,6 @@ import {
   Thead,
   Tr,
 } from "@chakra-ui/react";
-import {
-  FaArrowLeft,
-  FaArrowRight,
-  FaSortAlphaDown,
-  FaSortAlphaDownAlt,
-} from "react-icons/fa";
-import { BiExport } from "react-icons/bi";
 import { downloadExcel } from "react-export-table-to-excel";
 import dayjs from "dayjs";
 import LocalizedFormat from "dayjs/plugin/localizedFormat";
@@ -153,7 +148,13 @@ const ReactChakraTable = (props: ReactChakraTableProps) => {
                         {{
                           asc: (
                             <Icon
-                              as={FaSortAlphaDown}
+                              as={
+                                props.sortIconDown ? (
+                                  props.sortIconDown
+                                ) : (
+                                  <StatDownArrow />
+                                )
+                              }
                               color={props.sortIconColor}
                               w="4"
                               h="4"
@@ -162,7 +163,13 @@ const ReactChakraTable = (props: ReactChakraTableProps) => {
                           ),
                           desc: (
                             <Icon
-                              as={FaSortAlphaDownAlt}
+                              as={
+                                props.sortIconUp ? (
+                                  props.sortIconUp
+                                ) : (
+                                  <StatUpArrow />
+                                )
+                              }
                               color={props.sortIconColor}
                               w="4"
                               h="4"
@@ -218,7 +225,11 @@ const ReactChakraTable = (props: ReactChakraTableProps) => {
       <HStack spacing="2">
         <IconButton
           aria-label="<"
-          icon={<Icon as={FaArrowLeft} />}
+          icon={
+            <Icon
+              as={props.paginationPrevIcon ? props.paginationPrevIcon : "<"}
+            />
+          }
           isDisabled={page === 1}
           onClick={() => setPage((prevPage) => prevPage - 1)}
           {...props.paginationNextPrevButtonProps}
@@ -226,7 +237,11 @@ const ReactChakraTable = (props: ReactChakraTableProps) => {
         {paginationPageButtons()}
         <IconButton
           aria-label=">"
-          icon={<Icon as={FaArrowRight} />}
+          icon={
+            <Icon
+              as={props.paginationNextIcon ? props.paginationNextIcon : ">"}
+            />
+          }
           isDisabled={page === pagesCounter}
           onClick={() => setPage((prevPage) => prevPage + 1)}
           {...props.paginationNextPrevButtonProps}
@@ -295,7 +310,13 @@ const ReactChakraTable = (props: ReactChakraTableProps) => {
               mb="2"
               mr="2"
               onClick={() => downloadExcelHandler()}
-              leftIcon={<Icon as={BiExport} w="5" h="5" />}
+              leftIcon={
+                <Icon
+                  as={props.exportIcon ? props.exportIcon : "^"}
+                  w="5"
+                  h="5"
+                />
+              }
               {...props.exportButtonProps}
             >
               {props.exportText}

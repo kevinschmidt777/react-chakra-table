@@ -23,8 +23,13 @@ export interface ReactChakraTableProps {
   exportText?: string;
   language?: string;
   sortIconColor?: string;
+  sortIconUp?: any;
+  sortIconDown?: any;
+  exportIcon?: any;
   paginationPageButtonProps?: ButtonProps;
   paginationNextPrevButtonProps?: IconButtonProps;
+  paginationNextIcon?: any;
+  paginationPrevIcon?: any;
   exportButtonProps: ButtonProps;
   filterByText?: string;
   defaultSorting?: SortingState;
