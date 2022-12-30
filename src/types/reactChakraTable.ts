@@ -30,7 +30,7 @@ export interface ReactChakraTableProps {
   paginationNextPrevButtonProps?: IconButtonProps;
   paginationNextIcon?: any;
   paginationPrevIcon?: any;
-  exportButtonProps: ButtonProps;
+  exportButtonProps?: ButtonProps;
   filterByText?: string;
   defaultSorting?: SortingState;
   defaultFiltering?: ColumnFiltersState;
