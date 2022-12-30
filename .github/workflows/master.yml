@@ -28,36 +28,7 @@ jobs:
           name: react-chakra-table
           path: |
             ./lib
-            ./package.json
             ./README.md
-
-  release:
-    needs: [build]
-
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Get artifact
-        uses: actions/download-artifact@master
-        with:
-          name: react-chakra-table
-          path: ./
-
-      - name: Get version
-        id: package-version
-        uses: martinbeentjes/npm-get-version-action@master
-
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
-        with:
-          name: react-chakra-table
-          tag_name: ${{ steps.package-version.outputs.current-version}}
-          release_name: ${{ steps.package-version.outputs.current-version}}
-          draft: false
-          prerelease: false
 
   publish:
     needs: [build]
@@ -69,9 +40,7 @@ jobs:
         uses: actions/download-artifact@master
         with:
           name: react-chakra-table
-          path: |
-            ./
-            !./package.json
+          path: ./
 
       - name: Setup npm
         uses: actions/setup-node@v2
