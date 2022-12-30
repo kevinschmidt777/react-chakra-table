@@ -58,5 +58,13 @@ jobs:
           draft: false
           prerelease: false
 
+      - name: Setup npm
+        uses: actions/setup-node@v2
+        with:
+          node-version: "16.x"
+          registry-url: "https://registry.npmjs.org"
+
       - name: Publish NPM Package
         run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
