@@ -1,6 +1,6 @@
 {
   "name": "react-chakra-table",
-  "version": "0.9.7",
+  "version": "0.9.8",
   "description": "a simple, sortable, filterable, react table grid - styled with chakra-ui.",
   "scripts": {
     "build": "npm run build:esm && npm run build:cjs",
@@ -22,8 +22,6 @@
   "files": [
     "lib/**/*"
   ],
-  "types": "./lib/cjs/types/index.d.ts",
-  "main": "./lib/cjs/index.js",
   "exports": {
     ".": {
       "import": {
