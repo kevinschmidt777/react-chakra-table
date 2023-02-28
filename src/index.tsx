@@ -263,42 +263,40 @@ const ReactChakraTable = (props: ReactChakraTableProps) => {
   };
 
   const paginationRenderer = (
-    <Box maxWidth="full" overflowX="auto">
-      <Center mt="5">
-        <HStack spacing="2">
-          <IconButton
-            aria-label="<"
-            icon={
-              <Icon
-                as={
-                  props.paginationPrevIcon
-                    ? props.paginationPrevIcon
-                    : ArrowBackIcon
-                }
-              />
-            }
-            isDisabled={page === 1}
-            onClick={() => setPage((prevPage) => prevPage - 1)}
-            {...props.paginationNextPrevButtonProps}
-          />
-          {paginationPageButtons()}
-          <IconButton
-            aria-label=">"
-            icon={
-              <Icon
-                as={
-                  props.paginationNextIcon
-                    ? props.paginationNextIcon
-                    : ArrowForwardIcon
-                }
-              />
-            }
-            isDisabled={page === pagesCounter}
-            onClick={() => setPage((prevPage) => prevPage + 1)}
-            {...props.paginationNextPrevButtonProps}
-          />
-        </HStack>
-      </Center>
+    <Box maxWidth="full" overflowX="auto" mt="5">
+      <HStack spacing="2">
+        <IconButton
+          aria-label="<"
+          icon={
+            <Icon
+              as={
+                props.paginationPrevIcon
+                  ? props.paginationPrevIcon
+                  : ArrowBackIcon
+              }
+            />
+          }
+          isDisabled={page === 1}
+          onClick={() => setPage((prevPage) => prevPage - 1)}
+          {...props.paginationNextPrevButtonProps}
+        />
+        {paginationPageButtons()}
+        <IconButton
+          aria-label=">"
+          icon={
+            <Icon
+              as={
+                props.paginationNextIcon
+                  ? props.paginationNextIcon
+                  : ArrowForwardIcon
+              }
+            />
+          }
+          isDisabled={page === pagesCounter}
+          onClick={() => setPage((prevPage) => prevPage + 1)}
+          {...props.paginationNextPrevButtonProps}
+        />
+      </HStack>
     </Box>
   );
 
